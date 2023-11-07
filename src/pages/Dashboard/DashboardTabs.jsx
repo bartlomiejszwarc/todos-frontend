@@ -70,11 +70,11 @@ function DashboardTabs() {
           }}
         />
         <MenuTab
-          text={'Invitations'}
+          text={'Friends'}
           textIcon={<PeopleAltIcon />}
           iconColor={'#16a34a'}
           onClick={() => {
-            setFriendsTabTitle('INVITATIONS', 'Friends invitations');
+            setFriendsTabTitle('INVITATIONS', 'Friends');
           }}
         />
       </div>

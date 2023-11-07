@@ -1,23 +1,21 @@
-import Avatar from '@mui/material/Avatar';
 import DoneIcon from '@mui/icons-material/Done';
 import ClearIcon from '@mui/icons-material/Clear';
 import { usePostData } from '../hooks/usePostData';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useState } from 'react';
 import { useFriendsContext } from '../hooks/useFriendsContext';
+import CustomAvatar from './CustomAvatar';
 
-const stc = require('string-to-color');
 function FriendsInvitationCard({ item }) {
   const { dispatch } = useFriendsContext();
   const [isAccepted, setIsAccepted] = useState(null);
   const [isDeclined, setIsDeclined] = useState(null);
   const { postData } = usePostData();
   const { user } = useAuthContext();
+
   const acceptFriendsRequests = async () => {
     const body = { id: user.id, acceptedUserId: item._id };
-
-    //await postData(process.env.REACT_APP_API_USERS_REQUESTS_ACCEPT, body);
-
+    await postData(process.env.REACT_APP_API_USERS_REQUESTS_ACCEPT, body);
     setIsAccepted(true);
     setTimeout(() => {
       setIsAccepted(null);
@@ -29,9 +27,7 @@ function FriendsInvitationCard({ item }) {
 
   const declineFriendsRequests = async () => {
     const body = { id: user.id, declinedUserId: item._id };
-
-    //await postData(process.env.REACT_APP_API_USERS_REQUESTS_DECLINE, body);
-
+    await postData(process.env.REACT_APP_API_USERS_REQUESTS_DECLINE, body);
     setIsDeclined(true);
     setTimeout(() => {
       setIsAccepted(null);
@@ -39,7 +35,7 @@ function FriendsInvitationCard({ item }) {
       dispatch({ type: 'REMOVE_FROM_INCOMING_INVITATIONS', payload: item._id });
     }, 1000);
   };
-  const letterColor = stc(item?.displayName?.toUpperCase());
+
   if (!item) {
     return null;
   }
@@ -48,11 +44,7 @@ function FriendsInvitationCard({ item }) {
     <div className='flex flex-row justify-between items-center'>
       <div className='flex items-center space-x-4'>
         <div>
-          {!item?.profilePictureUrl && (
-            <Avatar sx={{ bgcolor: letterColor }}>
-              <span className='uppercase'>{item?.displayName.slice(0, 1)}</span>
-            </Avatar>
-          )}
+          <CustomAvatar user={item} />
         </div>
         <div className='flex flex-col'>
           <span className='text-xl'>{item?.displayName}</span>

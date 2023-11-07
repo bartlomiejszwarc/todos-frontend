@@ -85,8 +85,8 @@ function FriendsRequestsPage() {
         aria-label='secondary tabs example'
       >
         <Tab value={0} label='Your friends' {...a11yProps(0)} />
-        <Tab value={1} label='Incoming' {...a11yProps(1)} />
-        <Tab value={2} label='Pending' {...a11yProps(2)} />
+        <Tab value={1} label='Incoming invitations' {...a11yProps(1)} />
+        <Tab value={2} label='Pending invitations' {...a11yProps(2)} />
       </Tabs>
       <CustomTabPanel value={value} index={0}>
         <FriendsList friendsList={data?.requests?.friends} />

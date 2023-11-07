@@ -1,4 +1,3 @@
-import Avatar from '@mui/material/Avatar';
 import { Checkbox } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -7,8 +6,8 @@ import { useFetchData } from '../../hooks/useFetchData';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useEffect, useState } from 'react';
 import { useFriendsContext } from '../../hooks/useFriendsContext';
+import CustomAvatar from '../../components/CustomAvatar';
 
-const stc = require('string-to-color');
 function SearchUserCard({ user }) {
   useEffect(() => {
     const fetch = async () => {
@@ -18,7 +17,6 @@ function SearchUserCard({ user }) {
   }, []);
 
   const { friends } = useFriendsContext();
-  const letterColor = stc(user?.displayName?.toUpperCase());
   const { user: currentUser } = useAuthContext();
   const { postData, data, error } = usePostData();
   const { fetchData, data: currentUserFriendsRequests, error: currentUserFriendsRequestsError } = useFetchData();
@@ -52,14 +50,12 @@ function SearchUserCard({ user }) {
     else return setIsFriend(false);
   };
 
+  if (currentUserFriendsRequestsError) return null;
+
   return (
     <div className='flex justify-between items-center'>
       <div className='flex flex-row space-x-4 items-center'>
-        {!user?.profilePictureUrl && (
-          <Avatar sx={{ bgcolor: letterColor }}>
-            <span className='uppercase'>{user?.displayName.slice(0, 1)}</span>
-          </Avatar>
-        )}
+        <CustomAvatar user={user} />
         <div className='w-full flex flex-col'>
           <span className='text-xl'>{user?.displayName}</span>
           <span className='text-sm'>{user?.username}</span>
