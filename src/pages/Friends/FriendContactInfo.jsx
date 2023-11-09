@@ -3,7 +3,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 function FriendContactInfo({ friend }) {
   return (
-    <div className='w-full py-16 flex flex-col items-center space-y-5 bg-gradient-to-r from-pink-100 via-purple-200 to-indigo-100'>
+    <div className='w-full py-16 flex flex-col items-center space-y-5'>
       <div className='w-1/2 space-y-5'>
         <div className='flex flex-col items-center '>
           <CustomAvatar user={friend} size='5' />

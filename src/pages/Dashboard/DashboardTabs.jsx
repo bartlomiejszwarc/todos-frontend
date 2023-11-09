@@ -65,13 +65,14 @@ function DashboardTabs() {
         />
         <span className='pl-5 pt-4 font-bold text-xl'>People</span>
         <MenuTab
-          text={'Find friends'}
-          textIcon={<PeopleAltIcon />}
-          iconColor={'#1d4ed8'}
+          text={'Feed'}
+          textIcon={<Diversity2Icon />}
+          iconColor={'#be185d'}
           onClick={() => {
-            setFriendsTabTitle('SEARCH_USERS', 'Find friends');
+            setFriendsTabTitle('FEED', 'Need help? Ask your friends!');
           }}
         />
+
         <MenuTab
           text={'Friends'}
           textIcon={<PeopleAltIcon />}
@@ -81,13 +82,14 @@ function DashboardTabs() {
           }}
         />
         <MenuTab
-          text={'Feed'}
-          textIcon={<Diversity2Icon />}
-          iconColor={'#be185d'}
+          text={'Find friends'}
+          textIcon={<PeopleAltIcon />}
+          iconColor={'#1d4ed8'}
           onClick={() => {
-            setFriendsTabTitle('FEED', 'Need help? Ask your friends!');
+            setFriendsTabTitle('SEARCH_USERS', 'Find friends');
           }}
         />
+
         <span className='pl-5 pt-4 font-bold text-xl'>Account</span>
         <MenuTab
           text={'Details'}
