@@ -3,6 +3,8 @@ import CustomDrawer from '../../components/CustomDrawer';
 import { useDashboardContentContext } from '../../hooks/useDashboardContentContext';
 import ContentLayout from '../../layouts/ContentLayout';
 import Navbar from '../../components/Navbar';
+import { Route, Routes, Outlet } from 'react-router-dom';
+import TasksPage from '../Tasks/TasksPage';
 
 function DashboardPage() {
   const { content } = useDashboardContentContext();

@@ -3,6 +3,7 @@ import TasksPage from '../pages/Tasks/TasksPage';
 import { useTasksContext } from '../hooks/useTasksContext';
 import FriendsSearchPage from '../pages/Friends/FriendsSearchPage';
 import FriendsRequestsPage from '../pages/Friends/Requests/FriendsRequestsPage';
+import FeedPage from '../pages/Posts/FeedPage';
 export const DashboardContentContext = createContext();
 
 export const dashboardContentReducer = (state, action) => {
@@ -13,6 +14,13 @@ export const dashboardContentReducer = (state, action) => {
       return { content: <FriendsSearchPage title={action.payload.tab} /> };
     case 'INVITATIONS':
       return { content: <FriendsRequestsPage title={action.payload.tab} /> };
+    case 'FEED':
+      return { content: <FeedPage title={action.payload.tab} /> };
+    case 'DETAILS':
+      return { content: <FriendsRequestsPage title={action.payload.tab} /> };
+    case 'SETTINGS':
+      return { content: <FriendsRequestsPage title={action.payload.tab} /> };
+
     default:
       return 'tasks';
   }

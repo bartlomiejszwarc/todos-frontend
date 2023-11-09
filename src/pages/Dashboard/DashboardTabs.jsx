@@ -7,6 +7,9 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { useTasksContext } from '../../hooks/useTasksContext';
 import { useDashboardContentContext } from '../../hooks/useDashboardContentContext';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import Diversity2Icon from '@mui/icons-material/Diversity2';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 
 function DashboardTabs() {
   const { user } = useAuthContext();
@@ -75,6 +78,31 @@ function DashboardTabs() {
           iconColor={'#16a34a'}
           onClick={() => {
             setFriendsTabTitle('INVITATIONS', 'Friends');
+          }}
+        />
+        <MenuTab
+          text={'Feed'}
+          textIcon={<Diversity2Icon />}
+          iconColor={'#be185d'}
+          onClick={() => {
+            setFriendsTabTitle('FEED', 'Need help? Ask your friends!');
+          }}
+        />
+        <span className='pl-5 pt-4 font-bold text-xl'>Account</span>
+        <MenuTab
+          text={'Details'}
+          textIcon={<ManageAccountsIcon />}
+          iconColor={'#10b981'}
+          onClick={() => {
+            setFriendsTabTitle('SEARCH_USERS', 'Find friends');
+          }}
+        />
+        <MenuTab
+          text={'Settings'}
+          textIcon={<SettingsSuggestIcon />}
+          iconColor={'#171717'}
+          onClick={() => {
+            setFriendsTabTitle('SEARCH_USERS', 'Find friends');
           }}
         />
       </div>
