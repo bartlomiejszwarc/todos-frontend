@@ -14,6 +14,11 @@ function FeedPage() {
 
   useEffect(() => {
     const concatedArrays = data?.userPosts.concat(data?.friendsPosts);
+    concatedArrays.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB - dateA;
+    });
     setPosts(concatedArrays);
   }, [data]);
 
@@ -24,7 +29,7 @@ function FeedPage() {
       </div>
       <div className={`space-y-3 flex flex-col`}>
         {posts?.map((post, key) => (
-          <div className={`flex w-full ${user.id === post.owner ? 'justify-end' : 'justify-start'}`}>
+          <div key={key} className={`flex w-full ${user.id === post.owner ? 'justify-end' : 'justify-start'}`}>
             <Post key={key} post={post} />
           </div>
         ))}
