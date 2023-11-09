@@ -21,7 +21,7 @@ function CreatePost() {
   };
   return (
     <>
-      <div className='w-11/12 lg:w-1/2  h-36 flex flex-col space-y-2 '>
+      <div className='w-11/12 lg:w-2/3  h-36 flex flex-col space-y-2 '>
         <TextareaAutosize
           onChange={handleOnChangeTextarea}
           autoFocus
@@ -31,7 +31,7 @@ function CreatePost() {
           className='border-2 bg-transparent px-2 py-1 rounded-md outline-none'
         />
         <div className='w-full flex justify-end'>
-          <div className='w-24 '>
+          <div className='w-24'>
             <ConfirmButton buttonText={'Ask!'} onClick={handlePostData} />
           </div>
         </div>

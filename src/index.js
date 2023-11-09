@@ -9,6 +9,9 @@ import { TasksContextProvider } from './context/TasksContext';
 import { DashboardContentContextProvider } from './context/DashboardContentContext';
 import { ScreenSizeContextProvider } from './context/ScreenSizeContext';
 import { FriendsContextProvider } from './context/FriendsContext';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json';
+TimeAgo.addDefaultLocale(en);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
