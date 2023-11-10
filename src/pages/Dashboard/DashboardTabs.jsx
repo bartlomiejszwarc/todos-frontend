@@ -96,7 +96,7 @@ function DashboardTabs() {
           textIcon={<ManageAccountsIcon />}
           iconColor={'#10b981'}
           onClick={() => {
-            setFriendsTabTitle('SEARCH_USERS', 'Find friends');
+            setFriendsTabTitle('DETAILS', 'Account details');
           }}
         />
         <MenuTab
@@ -104,7 +104,7 @@ function DashboardTabs() {
           textIcon={<SettingsSuggestIcon />}
           iconColor={'#171717'}
           onClick={() => {
-            setFriendsTabTitle('SEARCH_USERS', 'Find friends');
+            setFriendsTabTitle('SETTINGS', 'Settings');
           }}
         />
       </div>

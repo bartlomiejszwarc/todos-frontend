@@ -14,7 +14,7 @@ function FeedPage() {
 
   useEffect(() => {
     const concatedArrays = data?.userPosts.concat(data?.friendsPosts);
-    concatedArrays.sort((a, b) => {
+    concatedArrays?.sort((a, b) => {
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);
       return dateB - dateA;
