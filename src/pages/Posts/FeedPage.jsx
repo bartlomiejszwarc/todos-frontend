@@ -3,11 +3,13 @@ import Post from '../../components/Post';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useFetchData } from '../../hooks/useFetchData';
 import { useEffect, useState } from 'react';
+import PostSkeleton from '../../skeletons/PostSkeleton';
+import { usePostsContext } from '../../hooks/usePostsContext';
 
 function FeedPage() {
   const { user } = useAuthContext();
+  const { posts, dispatch } = usePostsContext();
   const { fetchData, data, isLoading, error } = useFetchData();
-  const [posts, setPosts] = useState([]);
   useEffect(() => {
     fetchData(process.env.REACT_APP_API_GET_POSTS, user.id);
   }, []);
@@ -19,7 +21,7 @@ function FeedPage() {
       const dateB = new Date(b.date);
       return dateB - dateA;
     });
-    setPosts(concatedArrays);
+    dispatch({ type: 'SET_POSTS', payload: concatedArrays });
   }, [data]);
 
   return (
@@ -28,11 +30,15 @@ function FeedPage() {
         <CreatePost />
       </div>
       <div className={`space-y-3 flex flex-col`}>
-        {posts?.map((post, key) => (
-          <div key={key} className={`flex w-full ${user.id === post.owner ? 'justify-end' : 'justify-start'}`}>
-            <Post key={key} post={post} />
-          </div>
-        ))}
+        {!isLoading ? (
+          posts?.map((post, key) => (
+            <div key={key} className={`flex w-full ${user?.id === post?.owner ? 'justify-end' : 'justify-start'}`}>
+              <Post key={key} post={post} />
+            </div>
+          ))
+        ) : (
+          <PostSkeleton amount={3} />
+        )}
       </div>
     </div>
   );

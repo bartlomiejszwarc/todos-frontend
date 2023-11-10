@@ -10,7 +10,7 @@ function FriendCard({ friend }) {
     setDialogOpen(false);
   };
   return (
-    <div className='flex flex-row xl:flex-col items-center xl:justify-center xl:aspect-square xl:w-[20%] w-full border-2 rounded-lg m-1 lg:py-0 py-2'>
+    <div className='flex flex-row xl:flex-col items-center xl:justify-center xl:aspect-square xl:w-[20%] w-full border-2 rounded-lg m-1 xl:py-0 py-4'>
       <div className='leading-none flex flex-row xl:flex-col items-center xl:justify-center justify-between w-full px-6  xl:px-0 xl:space-y-4'>
         <div className='flex xl:flex-col items-center space-x-3 xl:space-x-0'>
           <CustomAvatar user={friend} />

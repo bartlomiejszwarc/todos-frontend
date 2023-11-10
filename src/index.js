@@ -9,6 +9,7 @@ import { TasksContextProvider } from './context/TasksContext';
 import { DashboardContentContextProvider } from './context/DashboardContentContext';
 import { ScreenSizeContextProvider } from './context/ScreenSizeContext';
 import { FriendsContextProvider } from './context/FriendsContext';
+import { PostsContextProvider } from './context/PostsContext';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 TimeAgo.addDefaultLocale(en);
@@ -19,11 +20,13 @@ root.render(
     <AuthContextProvider>
       <ScreenSizeContextProvider>
         <FriendsContextProvider>
-          <TasksContextProvider>
-            <DashboardContentContextProvider>
-              <App />
-            </DashboardContentContextProvider>
-          </TasksContextProvider>
+          <PostsContextProvider>
+            <TasksContextProvider>
+              <DashboardContentContextProvider>
+                <App />
+              </DashboardContentContextProvider>
+            </TasksContextProvider>
+          </PostsContextProvider>
         </FriendsContextProvider>
       </ScreenSizeContextProvider>
     </AuthContextProvider>

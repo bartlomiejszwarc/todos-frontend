@@ -8,13 +8,13 @@ function Post({ post }) {
   const { user } = useAuthContext();
 
   useEffect(() => {
-    if (post) fetchData(process.env.REACT_APP_API_USERS_DETAILS, post.owner);
+    if (post) fetchData(process.env.REACT_APP_API_USERS_DETAILS, post?.owner);
   }, [post]);
 
   return (
     <div
       className={`border-[1px] h-auto w-4/5 lg:w-3/5 flex flex-col space-y-2 px-3 py-3 rounded-lg ${
-        post.owner === user.id ? 'bg-indigo-100' : 'bg-pink-100'
+        post?.owner === user?.id ? 'bg-indigo-100' : 'bg-pink-100'
       }`}
     >
       <div className='flex space-x-2'>
@@ -28,7 +28,7 @@ function Post({ post }) {
           </p>
         </div>
       </div>
-      <div>{post.text}</div>
+      <div>{post?.text}</div>
     </div>
   );
 }
