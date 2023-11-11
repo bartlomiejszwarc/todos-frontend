@@ -33,6 +33,9 @@ function CreateTaskDialog({ onClose }) {
       deadline: taskDeadline,
     };
     await postData(process.env.REACT_APP_API_TASKS_CREATE, body);
+    setTimeout(() => {
+      handleDialogClose();
+    }, 200);
   };
   useEffect(() => {
     if (data) dispatch({ type: 'ADD_TASK', payload: data?.task });
