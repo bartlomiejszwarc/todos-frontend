@@ -5,6 +5,7 @@ import PageLayout from './layouts/PageLayout';
 import DashboardPage from './pages/Dashboard/DashboardPage';
 import TasksPage from './pages/Tasks/TasksPage';
 import { Route, Routes } from 'react-router-dom';
+
 function App() {
   return (
     <PageLayout>
