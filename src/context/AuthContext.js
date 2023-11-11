@@ -58,6 +58,7 @@ export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
+
     if (isAuth && !isLoading) {
       dispatch({ type: 'LOGIN', payload: user });
       navigate('dashboard');

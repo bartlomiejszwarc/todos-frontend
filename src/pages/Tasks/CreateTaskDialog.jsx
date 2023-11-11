@@ -6,9 +6,14 @@ import FlagIcon from '@mui/icons-material/Flag';
 import Menu from '@mui/material/Menu';
 import PriorityList from './PriorityList';
 import Calendar from './Calendar';
-import { useCreateTask } from '../../hooks/useCreateTask';
 import { useState, useEffect } from 'react';
+import { usePostData } from '../../hooks/usePostData';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useTasksContext } from '../../hooks/useTasksContext';
+
 function CreateTaskDialog({ onClose }) {
+  const { user } = useAuthContext();
+  const { dispatch } = useTasksContext();
   const [anchorPriorityElement, setAnchorPriorityElement] = useState(null);
   const openPriorityMenu = Boolean(anchorPriorityElement);
   const [anchorDateElement, setAnchorDateElement] = useState(null);
@@ -18,14 +23,20 @@ function CreateTaskDialog({ onClose }) {
   const [taskDeadline, setTaskDeadline] = useState();
   const [priority, setPriority] = useState(0);
 
-  const { createTask, error } = useCreateTask();
-  const handleCreateTask = () => {
-    createTask(taskTitle, taskDescription, priority?.value, taskDeadline).then((res) => {
-      if (res?.status === 200) {
-        handleDialogClose();
-      }
-    });
+  const { postData, data, error } = usePostData();
+  const handleCreateTask = async () => {
+    const body = {
+      owner: user.id,
+      text: taskTitle,
+      description: taskDescription,
+      priority: priority?.value,
+      deadline: taskDeadline,
+    };
+    await postData(process.env.REACT_APP_API_TASKS_CREATE, body);
   };
+  useEffect(() => {
+    if (data) dispatch({ type: 'ADD_TASK', payload: data?.task });
+  }, [data]);
 
   const handleDialogClose = () => {
     onClose();

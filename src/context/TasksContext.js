@@ -6,7 +6,7 @@ export const tasksReducer = (state, action) => {
     case 'SET_TASKS':
       return { ...state, tasks: action.payload };
     case 'ADD_TASK':
-      return { tasks: [...state.tasks, action.payload], tab: state.tab };
+      return { ...state, tasks: [...state.tasks, action.payload], tab: state.tab };
     case 'DELETE_TASK':
       return { tasks: state.tasks.filter((task) => task._id !== action.payload), tab: state.tab };
     case 'SET_TAB':

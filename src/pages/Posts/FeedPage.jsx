@@ -8,14 +8,16 @@ import { usePostsContext } from '../../hooks/usePostsContext';
 
 function FeedPage() {
   const { user } = useAuthContext();
+
   const { posts, dispatch } = usePostsContext();
   const { fetchData, data, isLoading, error } = useFetchData();
   useEffect(() => {
-    fetchData(process.env.REACT_APP_API_GET_POSTS, user.id);
-  }, []);
+    if (user) fetchData(process.env.REACT_APP_API_GET_POSTS, user.id);
+  }, [user]);
 
   useEffect(() => {
-    const concatedArrays = data?.userPosts.concat(data?.friendsPosts);
+    const concatedArrays = data?.userPosts?.concat(data?.friendsPosts);
+
     concatedArrays?.sort((a, b) => {
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);

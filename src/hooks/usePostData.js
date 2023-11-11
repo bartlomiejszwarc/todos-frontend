@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useAuthContext } from './useAuthContext';
 
 export const usePostData = () => {
+  const { user } = useAuthContext();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
   const postData = async (postUrl, body) => {
     setError(null);
-    const headers = {
-      'Content-Type': 'application/json',
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
     };
     try {
-      const res = await axios.post(postUrl, body, { headers: headers });
+      const res = await axios.post(postUrl, body, config);
       setData(res.data);
     } catch (e) {
       setError(e);

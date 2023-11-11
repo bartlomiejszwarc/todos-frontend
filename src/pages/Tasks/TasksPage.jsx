@@ -1,27 +1,28 @@
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
-import { useFetchTasks } from '../../hooks/useFetchTasks';
+import { useFetchData } from '../../hooks/useFetchData';
 import CircularProgress from '@mui/material/CircularProgress';
 import TasksList from './TasksList';
-
 import CreateTaskDialog from './CreateTaskDialog';
 import { useState, useEffect } from 'react';
 import { Dialog } from '@mui/material';
 import { useTasksContext } from '../../hooks/useTasksContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { useFilterTasks } from '../../hooks/useFilterTasks';
 
 function TasksPage({ title }) {
+  const { dispatch } = useTasksContext();
   const { user } = useAuthContext();
-  const { data, isLoading } = useFetchTasks(process.env.REACT_APP_API_TASKS + user?.id);
-  const { tasks, tab } = useTasksContext();
-  const [tasksUpdated, setTasksUpdated] = useState(tasks);
-  const { filterTasks } = useFilterTasks();
+  const { fetchData, isLoading } = useFetchData();
+  const { tasks } = useTasksContext();
+
   const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
-    const filteredTasks = filterTasks(tasks, title);
-    setTasksUpdated(filteredTasks);
-  }, [tab, tasks]);
+    const fetch = async () => {
+      const fetchedTasks = await fetchData(process.env.REACT_APP_API_TASKS, user?.id);
+      dispatch({ type: 'SET_TASKS', payload: fetchedTasks.tasks });
+    };
+    if (user) fetch();
+  }, [user]);
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
@@ -45,7 +46,7 @@ function TasksPage({ title }) {
       )}
       {!isLoading && (
         <div className='pt-2 relative'>
-          <TasksList tasks={tasksUpdated} />
+          <TasksList tasks={tasks} />
         </div>
       )}
 
