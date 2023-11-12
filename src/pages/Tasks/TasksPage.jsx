@@ -7,12 +7,16 @@ import { useState, useEffect } from 'react';
 import { Dialog } from '@mui/material';
 import { useTasksContext } from '../../hooks/useTasksContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useFilterTasks } from '../../hooks/useFilterTasks';
+import TaskSkeleton from './../../skeletons/TaskSkeleton';
 
 function TasksPage({ title }) {
   const { dispatch } = useTasksContext();
   const { user } = useAuthContext();
   const { fetchData, isLoading } = useFetchData();
-  const { tasks } = useTasksContext();
+  const { tasks, tab } = useTasksContext();
+  const { filterTasks } = useFilterTasks();
+  const [tasksUpdated, setTasksUpdated] = useState([]);
 
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -23,6 +27,11 @@ function TasksPage({ title }) {
     };
     if (user) fetch();
   }, [user]);
+
+  useEffect(() => {
+    const filteredTasks = filterTasks(tasks, title);
+    setTasksUpdated(filteredTasks);
+  }, [tab, tasks]);
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
@@ -38,15 +47,15 @@ function TasksPage({ title }) {
       >
         <SpeedDialIcon />
       </button>
-
-      {isLoading && (
-        <div className='w-full flex justify-center pt-6'>
-          <CircularProgress sx={{ color: '#a21caf' }} />
-        </div>
-      )}
+      {isLoading && <TaskSkeleton amount='5' />}
       {!isLoading && (
         <div className='pt-2 relative'>
-          <TasksList tasks={tasks} />
+          <TasksList tasks={tasksUpdated} />
+        </div>
+      )}
+      {!isLoading && tasksUpdated?.length === 0 && (
+        <div className='pt-3 relative flex w-full justify-center overflow-y-hidden px-16'>
+          <p className='text-3xl font-thin text-center'>Nothing to do here</p>
         </div>
       )}
 
