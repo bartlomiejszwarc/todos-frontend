@@ -15,6 +15,7 @@ function CreatePost() {
   const { postData, data } = usePostData();
 
   const handlePostData = async () => {
+    setPostText('');
     const body = {
       owner: user.id,
       text: postText,
@@ -32,6 +33,7 @@ function CreatePost() {
       <div className='w-11/12 lg:w-2/3  h-36 flex flex-col space-y-2 '>
         <TextareaAutosize
           onChange={handleOnChangeTextarea}
+          value={postText}
           autoFocus
           placeholder='Ask your friends for anything'
           minRows='5'
