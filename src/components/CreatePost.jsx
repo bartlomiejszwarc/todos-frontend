@@ -15,12 +15,12 @@ function CreatePost() {
   const { postData, data } = usePostData();
 
   const handlePostData = async () => {
-    setPostText('');
     const body = {
       owner: user.id,
       text: postText,
     };
     await postData(process.env.REACT_APP_API_POSTS_CREATE, body);
+    setPostText('');
   };
 
   useEffect(() => {
