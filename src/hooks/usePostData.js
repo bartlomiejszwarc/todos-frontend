@@ -13,6 +13,10 @@ export const usePostData = () => {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
+      params: {
+        userId: user.id,
+        username: user.username,
+      },
     };
     try {
       const res = await axios.post(postUrl, body, config);

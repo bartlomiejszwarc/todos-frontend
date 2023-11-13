@@ -13,6 +13,10 @@ export const useDeleteTask = () => {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
+          params: {
+            userId: user.id,
+            username: user.username,
+          },
         };
         await axios.delete(process.env.REACT_APP_API_TASKS + _id, config);
         dispatch({ type: 'DELETE_TASK', payload: _id });
