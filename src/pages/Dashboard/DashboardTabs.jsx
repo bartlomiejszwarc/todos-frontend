@@ -9,10 +9,11 @@ import { useDashboardContentContext } from '../../hooks/useDashboardContentConte
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Diversity2Icon from '@mui/icons-material/Diversity2';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import { useEffect } from 'react';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 
 function DashboardTabs() {
-  const { user } = useAuthContext();
+  const { user, userInfo } = useAuthContext();
   const { dispatch: tasksDispatch } = useTasksContext();
   const { dispatch: dashboardContentDispatch } = useDashboardContentContext();
 
@@ -28,7 +29,7 @@ function DashboardTabs() {
 
   return (
     <div className='h-auto flex flex-col space-y-2'>
-      <span className='pl-6'>Hello, {user?.displayName}</span>
+      <span className='pl-6'>Hello, {userInfo?.displayName}</span>
       <span className='pl-5 pt-4 font-bold text-xl'>Tasks</span>
       <div className='flex flex-col space-y-4 '>
         <MenuTab

@@ -30,7 +30,7 @@ export const useLogin = () => {
       setIsLoading(false);
       navigate('/dashboard');
     } catch (e) {
-      setError(e.response.data.message);
+      setError(e?.response?.data?.message);
     }
   };
   return { login, isLoading, error };

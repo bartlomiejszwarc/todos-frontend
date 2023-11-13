@@ -21,6 +21,7 @@ export const usePutData = () => {
     try {
       const res = await axios.put(postUrl, body, config);
       setData(res.data);
+      return res.data;
     } catch (e) {
       setError(e);
     }

@@ -3,8 +3,8 @@ import { TextField } from '@mui/material';
 import ConfirmButton from './../../../components/ConfirmButton';
 function SettingsPage() {
   return (
-    <div className='w-full flex justify-center py-6 h-screen'>
-      <div className='w-2/3 flex flex-col items-center text-xl space-y-3'>
+    <div className='w-full flex justify-center py-6 h-auto'>
+      <div className='w-2/3 lg:w-1/3 flex flex-col items-center text-xl space-y-3'>
         <div className='w-full flex justify-between items-center'>
           <p>Show e-mail address</p>
           <Switch color='secondary' />

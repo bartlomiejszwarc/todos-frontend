@@ -9,7 +9,7 @@ import Snackbar from '@mui/material/Snackbar';
 
 import 'react-phone-input-2/lib/material.css';
 function DetailsPage() {
-  const { user } = useAuthContext();
+  const { user, dispatch } = useAuthContext();
   const { fetchData, data, isLoading } = useFetchData();
   const { putData, data: updatedData, error } = usePutData();
   const [displayName, setDisplayName] = useState();
@@ -61,7 +61,8 @@ function DetailsPage() {
       phoneNumber: phoneNumber,
       email: email,
     };
-    await putData(process.env.REACT_APP_API_USERS_DETAILS_UPDATE, body);
+    const res = await putData(process.env.REACT_APP_API_USERS_DETAILS_UPDATE, body);
+    dispatch({ type: 'UPDATE_USER_DETAILS', payload: res.user });
   };
 
   if (isLoading) return null;

@@ -19,18 +19,14 @@ function LoginForm() {
     <FormLayout formTitle={'Sign in'}>
       <div className='space-y-6'>
         <div className='flex flex-col items-center space-y-4'>
-          <TextField
-            variant='standard'
-            label='Username'
-            onChange={(e) => setUsername(e.target.value)}
-          />
+          <TextField variant='standard' label='Username' onChange={(e) => setUsername(e.target.value)} />
           <TextField
             variant='standard'
             label='Password'
             type='password'
             onChange={(e) => setPassword(e.target.value)}
           />
-          <span className='text-red-700'>{error}</span>
+          {/* <span className='text-red-700'>{error}</span> */}
         </div>
         <ConfirmButton buttonText={'Sign in'} onClick={handleSubmit} />
         <Divider>

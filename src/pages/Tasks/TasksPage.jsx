@@ -23,7 +23,7 @@ function TasksPage({ title }) {
   useEffect(() => {
     const fetch = async () => {
       const fetchedTasks = await fetchData(process.env.REACT_APP_API_TASKS, user?.id);
-      dispatch({ type: 'SET_TASKS', payload: fetchedTasks.tasks });
+      dispatch({ type: 'SET_TASKS', payload: fetchedTasks?.tasks });
     };
     if (user) fetch();
   }, [user]);
