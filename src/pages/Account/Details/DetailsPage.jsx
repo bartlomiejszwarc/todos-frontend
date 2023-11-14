@@ -4,14 +4,12 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import { usePutData } from '../../../hooks/usePutData';
-import { useFetchData } from '../../../hooks/useFetchData';
 import Snackbar from '@mui/material/Snackbar';
 
 import 'react-phone-input-2/lib/material.css';
 function DetailsPage() {
-  const { user, dispatch } = useAuthContext();
-  const { fetchData, data, isLoading } = useFetchData();
-  const { putData, data: updatedData, error } = usePutData();
+  const { userInfo, dispatch } = useAuthContext();
+  const { putData, error } = usePutData();
   const [displayName, setDisplayName] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [email, setEmail] = useState();
@@ -32,17 +30,10 @@ function DetailsPage() {
   };
 
   useEffect(() => {
-    const fetch = async () => {
-      await fetchData(process.env.REACT_APP_API_USERS_DETAILS, user?.id);
-    };
-    fetch();
-  }, [user]);
-
-  useEffect(() => {
-    setDisplayName(data?.user?.displayName);
-    setPhoneNumber(data?.user?.phoneNumber);
-    setEmail(data?.user?.email);
-  }, [data]);
+    setDisplayName(userInfo?.displayName);
+    setPhoneNumber(userInfo?.phoneNumber);
+    setEmail(userInfo?.email);
+  }, [userInfo]);
 
   const handleOnChangeDisplayName = (e) => {
     setDisplayName(e.target.value);
@@ -56,7 +47,7 @@ function DetailsPage() {
 
   const updateDetails = async () => {
     const body = {
-      id: user.id,
+      id: userInfo.id,
       displayName: displayName,
       phoneNumber: phoneNumber,
       email: email,
@@ -65,12 +56,12 @@ function DetailsPage() {
     dispatch({ type: 'UPDATE_USER_DETAILS', payload: res.user });
   };
 
-  if (isLoading) return null;
+  if (!userInfo) return null;
 
   return (
     <div className='flex justify-center w-full h-auto '>
       <div className='w-[300px] h-full py-6 flex flex-col items-center justify-center space-y-4'>
-        <TextField label={user?.username} focused disabled fullWidth sx={{ bgcolor: 'white' }} />
+        <TextField label={userInfo?.username} focused disabled fullWidth sx={{ bgcolor: 'white' }} />
         <TextField
           label='Name'
           fullWidth

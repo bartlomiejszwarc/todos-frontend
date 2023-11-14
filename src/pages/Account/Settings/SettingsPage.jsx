@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import ConfirmButton from './../../../components/ConfirmButton';
 import { useAuthContext } from './../../../hooks/useAuthContext';
 import { usePutData } from '../../../hooks/usePutData';
+import { useLogout } from '../../../hooks/useLogout';
 
 function SettingsPage() {
   const { userInfo } = useAuthContext();
+  const { logout } = useLogout();
   const { putData } = usePutData();
   const [password, setPassword] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('');
@@ -83,7 +85,9 @@ function SettingsPage() {
           </div>
         </div>
         <div className='pt-12 flex flex-col items-center space-y-4'>
-          <p className='border-b-[1px] font-bold'>Logout</p>
+          <p className='border-b-[1px] font-bold' onClick={logout}>
+            Logout
+          </p>
           <p className='text-base text-red-800 border-b-[1px] font-bold'>Delete your account</p>
         </div>
       </div>

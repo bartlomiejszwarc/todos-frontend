@@ -15,12 +15,12 @@ function FriendContactInfo({ friend }) {
           <div className='space-y-1'>
             <div className='flex space-x-2 '>
               <PhoneIcon sx={{ color: '#16a34a' }} />
-              <p className='font-[500]'>+48 213 700 600</p>
+              <p className='font-[500]'>+{friend?.phoneNumber}</p>
             </div>
 
             <div className='flex space-x-2 '>
               <AlternateEmailIcon sx={{ color: '#0284c7' }} />
-              <p className='font-[500]'>sample@gmail.com</p>
+              <p className='font-[500]'>{friend?.email}</p>
             </div>
           </div>
         </div>
