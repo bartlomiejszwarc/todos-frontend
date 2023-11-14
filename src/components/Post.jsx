@@ -4,13 +4,14 @@ import { useEffect } from 'react';
 import ReactTimeAgo from 'react-time-ago';
 import { useAuthContext } from '../hooks/useAuthContext';
 function Post({ post }) {
-  const { fetchData, data } = useFetchData();
+  const { fetchData, data, isLoading } = useFetchData();
   const { user } = useAuthContext();
 
   useEffect(() => {
     if (post) fetchData(process.env.REACT_APP_API_USERS_DETAILS, post?.owner);
   }, [post]);
 
+  if (isLoading) return null;
   return (
     <div
       className={`border-[1px] h-auto w-4/5 lg:w-3/5 flex flex-col space-y-2 px-3 py-3 rounded-lg ${

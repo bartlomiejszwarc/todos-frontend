@@ -28,7 +28,7 @@ function Navbar() {
   };
 
   return (
-    <div className=' bg-fuchsia-700 w-full h-16 items-center  lg:rounded-tr-lg pl-4 flex space-x-4'>
+    <div className=' bg-fuchsia-700 w-full py-3 items-center  lg:rounded-tr-lg pl-4 flex space-x-4'>
       {screenSize.width <= 740 && <ArrowBackIosNewIcon className='text-neutral-50' onClick={openSidebar} />}
       <span className='text-neutral-100 text-2xl'>{tab}</span>
     </div>

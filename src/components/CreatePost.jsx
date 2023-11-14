@@ -8,7 +8,7 @@ import { usePostsContext } from '../hooks/usePostsContext';
 function CreatePost() {
   const { user } = useAuthContext();
   const { dispatch } = usePostsContext();
-  const [postText, setPostText] = useState(null);
+  const [postText, setPostText] = useState('');
   const handleOnChangeTextarea = (e) => {
     setPostText(e.target.value);
   };
