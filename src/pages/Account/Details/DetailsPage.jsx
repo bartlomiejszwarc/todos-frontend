@@ -56,6 +56,7 @@ function DetailsPage() {
       displayName: displayName,
       phoneNumber: phoneNumber,
       email: email,
+      profileImage: profileImage,
     };
     const res = await putData(process.env.REACT_APP_API_USERS_DETAILS_UPDATE, body);
     dispatch({ type: 'UPDATE_USER_DETAILS', payload: res.user });
@@ -79,7 +80,7 @@ function DetailsPage() {
           {isProfileImageSet && <Avatar src={profileImage} sx={{ width: '10rem', height: '10rem' }} />}
           <div className='absolute flex bottom-2 right-2'>
             <label htmlFor='photoInput'>
-              <AddAPhotoIcon className='text-neutral-800 cursor-pointer' style={{ width: '30px', height: 'auto' }} />
+              <AddAPhotoIcon className='text-neutral-700 cursor-pointer' style={{ width: '30px', height: 'auto' }} />
               <input
                 id='photoInput'
                 onChange={(e) => handleAddPhoto(e.target.files[0])}
