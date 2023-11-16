@@ -5,16 +5,26 @@ import ConfirmButton from './../../../components/ConfirmButton';
 import { useAuthContext } from './../../../hooks/useAuthContext';
 import { usePutData } from '../../../hooks/usePutData';
 import { useLogout } from '../../../hooks/useLogout';
+import { useDeleteData } from '../../../hooks/useDeleteData';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '../../../components/DialogContent';
 
 function SettingsPage() {
   const { userInfo } = useAuthContext();
   const { logout } = useLogout();
   const { putData } = usePutData();
+  const { deleteData } = useDeleteData();
   const [password, setPassword] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('');
   const [error, setError] = useState(false);
   const [showPhoneNumberEnabled, setShowPhoneNumberEnabled] = useState(false);
   const [showEmailEnabled, setShowEmailEnabled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setShowPhoneNumberEnabled(userInfo?.showPhoneNumber);
+    setShowEmailEnabled(userInfo?.showEmail);
+  }, [userInfo]);
 
   const handlePasswordOnChange = (e) => {
     setPassword(e.target.value);
@@ -23,11 +33,6 @@ function SettingsPage() {
     setRepeatedPassword(e.target.value);
   };
 
-  useEffect(() => {
-    setShowPhoneNumberEnabled(userInfo?.showPhoneNumber);
-    setShowEmailEnabled(userInfo?.showEmail);
-  }, [userInfo]);
-
   const handleSubmitPasswordChange = () => {
     setError(false);
     try {
@@ -35,6 +40,12 @@ function SettingsPage() {
     } catch (e) {
       setError(true);
     }
+  };
+
+  const handleDeleteAccount = async () => {
+    await deleteData(process.env.REACT_APP_API_USERS, userInfo?._id);
+    setOpen(false);
+    logout();
   };
 
   const handleShowPhoneNumberOnChange = async () => {
@@ -88,9 +99,30 @@ function SettingsPage() {
           <p className='border-b-[1px] font-bold' onClick={logout}>
             Logout
           </p>
-          <p className='text-base text-red-800 border-b-[1px] font-bold'>Delete your account</p>
+          <p className='text-base text-red-800 border-b-[1px] font-bold' onClick={() => setOpen(true)}>
+            Delete your account
+          </p>
         </div>
       </div>
+      <Dialog open={open}>
+        <DialogContent>
+          <div className='flex flex-col space-y-3'>
+            <span className='text-2xl font-[600]'>Delete account?</span>
+            <span className='text-xl font-[300]'>This can't be undone and it will be gone forever.</span>
+            <div className='flex justify-around pt-3'>
+              <button
+                className='border-b-[1px] text-red-700 font-medium text-xl'
+                onClick={() => handleDeleteAccount(userInfo?._id)}
+              >
+                Delete
+              </button>
+              <button className='text-neutral-400 text-xl' onClick={() => setOpen(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

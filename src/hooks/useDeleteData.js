@@ -6,6 +6,7 @@ export const useDeleteData = () => {
 
   const deleteData = async (url, param) => {
     try {
+      if (!param) throw Error('No parameter delivered');
       setTimeout(async () => {
         const config = {
           headers: {

@@ -12,7 +12,7 @@ function FeedPage() {
   const { posts, dispatch } = usePostsContext();
   const { fetchData, data, isLoading, error } = useFetchData();
   useEffect(() => {
-    if (user) fetchData(process.env.REACT_APP_API_GET_POSTS, user.id);
+    if (user) fetchData(process.env.REACT_APP_API_POSTS, user.id);
   }, [user]);
 
   useEffect(() => {

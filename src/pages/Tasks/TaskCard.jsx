@@ -25,9 +25,11 @@ function TaskCard({ task, index, lastItemIndex }) {
 
   const { deleteData } = useDeleteData();
 
-  const handleDeleteTask = async (id) => {
-    await deleteData(process.env.REACT_APP_API_TASKS, id);
-    dispatch({ type: 'DELETE_TASK', payload: id });
+  const handleDeleteTask = (id) => {
+    setTimeout(async () => {
+      await deleteData(process.env.REACT_APP_API_TASKS, id);
+      dispatch({ type: 'DELETE_TASK', payload: id });
+    }, 500);
   };
 
   return (
