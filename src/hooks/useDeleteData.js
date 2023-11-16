@@ -1,12 +1,10 @@
-import { useTasksContext } from './useTasksContext';
 import axios from 'axios';
 import { useAuthContext } from './useAuthContext';
 
-export const useDeleteTask = () => {
-  const { dispatch } = useTasksContext();
+export const useDeleteData = () => {
   const { user } = useAuthContext();
 
-  const deleteTask = async (_id) => {
+  const deleteData = async (url, param) => {
     try {
       setTimeout(async () => {
         const config = {
@@ -18,10 +16,9 @@ export const useDeleteTask = () => {
             username: user.username,
           },
         };
-        await axios.delete(process.env.REACT_APP_API_TASKS + _id, config);
-        dispatch({ type: 'DELETE_TASK', payload: _id });
+        await axios.delete(url + param, config);
       }, 400);
     } catch (e) {}
   };
-  return { deleteTask };
+  return { deleteData };
 };

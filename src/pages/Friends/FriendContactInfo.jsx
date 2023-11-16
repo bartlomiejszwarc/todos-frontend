@@ -15,12 +15,20 @@ function FriendContactInfo({ friend }) {
           <div className='space-y-1'>
             <div className='flex space-x-2 '>
               <PhoneIcon sx={{ color: '#16a34a' }} />
-              <p className='font-[500]'>+{friend?.phoneNumber}</p>
+              {friend?.phoneNumber ? (
+                <p className='font-[500]'>+{friend?.phoneNumber}</p>
+              ) : (
+                <p className='font-[300]'>Unavailable</p>
+              )}
             </div>
 
             <div className='flex space-x-2 '>
               <AlternateEmailIcon sx={{ color: '#0284c7' }} />
-              <p className='font-[500]'>{friend?.email}</p>
+              {friend?.email ? (
+                <p className='font-[500]'>+{friend?.email}</p>
+              ) : (
+                <p className='font-[300]'>Unavailable</p>
+              )}
             </div>
           </div>
         </div>

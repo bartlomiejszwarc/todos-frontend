@@ -2,10 +2,14 @@ import { Divider } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import moment from 'moment';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { useDeleteTask } from '../../hooks/useDeleteTask';
+import { useDeleteData } from '../../hooks/useDeleteData';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useTasksContext } from './../../hooks/useTasksContext';
+
 function TaskCard({ task, index, lastItemIndex }) {
+  const { dispatch } = useTasksContext();
+
   function setColorByPriority(task) {
     switch (task.priority) {
       case 1:
@@ -19,14 +23,19 @@ function TaskCard({ task, index, lastItemIndex }) {
     }
   }
 
-  const { deleteTask } = useDeleteTask();
+  const { deleteData } = useDeleteData();
+
+  const handleDeleteTask = async (id) => {
+    await deleteData(process.env.REACT_APP_API_TASKS, id);
+    dispatch({ type: 'DELETE_TASK', payload: id });
+  };
 
   return (
     <>
       <div className='flex items-start '>
         <Checkbox
           onClick={() => {
-            deleteTask(task._id);
+            handleDeleteTask(task._id);
           }}
           icon={<RadioButtonUncheckedIcon style={{ color: setColorByPriority(task) }} />}
           checkedIcon={<CheckCircleIcon style={{ color: setColorByPriority(task) }} />}
