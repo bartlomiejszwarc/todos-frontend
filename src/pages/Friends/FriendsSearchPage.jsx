@@ -29,8 +29,8 @@ function FriendsSearchPage() {
       <div className='flex flex-col items-center pt-4 w-10/12 lg:w-2/3 space-y-2'>
         <TextField
           fullWidth
-          label='Find'
-          placeholder='Find your friends'
+          label='Search'
+          placeholder='Enter at least 3 characters'
           id='input-with-icon-adornment'
           className='pl-1'
           color='secondary'

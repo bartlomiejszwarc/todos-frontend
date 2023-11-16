@@ -5,7 +5,7 @@ function UserInfoCardField({ fieldTitle, fieldText }) {
       {fieldText ? (
         <p className='text-lg text-neutral-900 font-[600]'>{fieldText}</p>
       ) : (
-        <p className='text-lg text-neutral-900 font-[600]'>Unavailable</p>
+        <p className='text-lg text-neutral-900 font-[600]'>Not available</p>
       )}
     </div>
   );

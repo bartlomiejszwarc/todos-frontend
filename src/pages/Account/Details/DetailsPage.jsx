@@ -5,14 +5,19 @@ import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import { usePutData } from '../../../hooks/usePutData';
 import Snackbar from '@mui/material/Snackbar';
-
+import CustomAvatar from './../../../components/CustomAvatar';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import Avatar from '@mui/material/Avatar';
 import 'react-phone-input-2/lib/material.css';
+
 function DetailsPage() {
   const { userInfo, dispatch } = useAuthContext();
   const { putData, error } = usePutData();
   const [displayName, setDisplayName] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [email, setEmail] = useState();
+  const [profileImage, setProfileImage] = useState('');
+  const [isProfileImageSet, setIsProfileImageSet] = useState(false);
 
   const [state, setState] = useState({
     open: false,
@@ -56,11 +61,35 @@ function DetailsPage() {
     dispatch({ type: 'UPDATE_USER_DETAILS', payload: res.user });
   };
 
+  const handleAddPhoto = (e) => {
+    setIsProfileImageSet(true);
+    if (e) {
+      const imageUrl = URL.createObjectURL(e);
+      setProfileImage(imageUrl);
+    }
+  };
+
   if (!userInfo) return null;
 
   return (
     <div className='flex justify-center w-full h-auto '>
       <div className='w-[300px] h-full py-6 flex flex-col items-center justify-center space-y-4'>
+        <div className='relative flex justify-center'>
+          {!isProfileImageSet && <CustomAvatar user={userInfo} size={10} />}
+          {isProfileImageSet && <Avatar src={profileImage} sx={{ width: '10rem', height: '10rem' }} />}
+          <div className='absolute flex bottom-2 right-2'>
+            <label htmlFor='photoInput'>
+              <AddAPhotoIcon className='text-neutral-800 cursor-pointer' style={{ width: '30px', height: 'auto' }} />
+              <input
+                id='photoInput'
+                onChange={(e) => handleAddPhoto(e.target.files[0])}
+                type='file'
+                accept='image/*'
+                style={{ display: 'none' }}
+              />
+            </label>
+          </div>
+        </div>
         <TextField label={userInfo?.username} focused disabled fullWidth sx={{ bgcolor: 'white' }} />
         <TextField
           label='Name'
