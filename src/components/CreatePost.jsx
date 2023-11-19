@@ -24,6 +24,7 @@ function CreatePost() {
     };
     await postData(process.env.REACT_APP_API_POSTS_CREATE, body);
     setPostText('');
+    setTextLength(0);
   };
 
   useEffect(() => {

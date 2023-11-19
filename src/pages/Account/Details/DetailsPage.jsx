@@ -7,17 +7,18 @@ import { usePutData } from '../../../hooks/usePutData';
 import Snackbar from '@mui/material/Snackbar';
 import CustomAvatar from './../../../components/CustomAvatar';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import Avatar from '@mui/material/Avatar';
+import axios from 'axios';
 import 'react-phone-input-2/lib/material.css';
 
 function DetailsPage() {
-  const { userInfo, dispatch } = useAuthContext();
+  const { user, userInfo, dispatch } = useAuthContext();
   const { putData, error } = usePutData();
   const [displayName, setDisplayName] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [email, setEmail] = useState();
+  const [country, setCountry] = useState();
+  const [city, setCity] = useState();
   const [profileImage, setProfileImage] = useState('');
-  const [isProfileImageSet, setIsProfileImageSet] = useState(false);
 
   const [state, setState] = useState({
     open: false,
@@ -38,10 +39,19 @@ function DetailsPage() {
     setDisplayName(userInfo?.displayName);
     setPhoneNumber(userInfo?.phoneNumber);
     setEmail(userInfo?.email);
+    setCountry(userInfo?.country);
+    setCity(userInfo?.city);
+    setProfileImage(userInfo?.profileImage);
   }, [userInfo]);
 
   const handleOnChangeDisplayName = (e) => {
     setDisplayName(e.target.value);
+  };
+  const handleOnChangeCountry = (e) => {
+    setCountry(e.target.value);
+  };
+  const handleOnChangeCity = (e) => {
+    setCity(e.target.value);
   };
   const handleOnChangePhoneNumber = (e) => {
     setPhoneNumber(e);
@@ -56,17 +66,31 @@ function DetailsPage() {
       displayName: displayName,
       phoneNumber: phoneNumber,
       email: email,
-      profileImage: profileImage,
+      country: country,
+      city: city,
     };
     const res = await putData(process.env.REACT_APP_API_USERS_DETAILS_UPDATE, body);
-    dispatch({ type: 'UPDATE_USER_DETAILS', payload: res.user });
+    dispatch({ type: 'UPDATE_USER_DETAILS', payload: res?.user });
   };
 
-  const handleAddPhoto = (e) => {
-    setIsProfileImageSet(true);
+  const handleAddPhoto = async (e) => {
     if (e) {
-      const imageUrl = URL.createObjectURL(e);
-      setProfileImage(imageUrl);
+      try {
+        const formData = new FormData();
+        formData.append('file', e);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+          params: {
+            userId: user.id,
+            username: user.username,
+          },
+        };
+        const res = await axios.put(process.env.REACT_APP_API_USERS_CHANGE_PROFILE_IMAGE, formData, config);
+        dispatch({ type: 'UPDATE_USER_DETAILS', payload: res?.data?.user });
+      } catch (e) {}
     }
   };
 
@@ -76,11 +100,13 @@ function DetailsPage() {
     <div className='flex justify-center w-full h-auto '>
       <div className='w-[300px] h-full py-6 flex flex-col items-center justify-center space-y-4'>
         <div className='relative flex justify-center'>
-          {!isProfileImageSet && <CustomAvatar user={userInfo} size={10} />}
-          {isProfileImageSet && <Avatar src={profileImage} sx={{ width: '10rem', height: '10rem' }} />}
+          <CustomAvatar user={userInfo} size={10} />
           <div className='absolute flex bottom-2 right-2'>
             <label htmlFor='photoInput'>
-              <AddAPhotoIcon className='text-neutral-700 cursor-pointer' style={{ width: '30px', height: 'auto' }} />
+              <AddAPhotoIcon
+                className='text-neutral-700 cursor-pointer hover:opacity-90'
+                style={{ width: '35px', height: 'auto' }}
+              />
               <input
                 id='photoInput'
                 onChange={(e) => handleAddPhoto(e.target.files[0])}
@@ -105,6 +131,20 @@ function DetailsPage() {
           onChange={(e) => handleOnChangeEmail(e)}
           sx={{ bgcolor: 'white' }}
           value={email || ''}
+        />
+        <TextField
+          label='Country'
+          fullWidth
+          onChange={(e) => handleOnChangeCountry(e)}
+          sx={{ bgcolor: 'white' }}
+          value={country || ''}
+        />
+        <TextField
+          label='City'
+          fullWidth
+          onChange={(e) => handleOnChangeCity(e)}
+          sx={{ bgcolor: 'white' }}
+          value={city || ''}
         />
         <PhoneInput specialLabel='' country={'pl'} onChange={(e) => handleOnChangePhoneNumber(e)} value={phoneNumber} />
 

@@ -8,9 +8,10 @@ import { useLogout } from '../../../hooks/useLogout';
 import { useDeleteData } from '../../../hooks/useDeleteData';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '../../../components/DialogContent';
+import Snackbar from '@mui/material/Snackbar';
 
 function SettingsPage() {
-  const { userInfo } = useAuthContext();
+  const { userInfo, dispatch } = useAuthContext();
   const { logout } = useLogout();
   const { putData } = usePutData();
   const { deleteData } = useDeleteData();
@@ -20,6 +21,21 @@ function SettingsPage() {
   const [showPhoneNumberEnabled, setShowPhoneNumberEnabled] = useState(false);
   const [showEmailEnabled, setShowEmailEnabled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const [state, setState] = useState({
+    openSnackbar: false,
+    vertical: 'bottom',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal, openSnackbar } = state;
+
+  const handleClick = () => {
+    setState({ ...state, openSnackbar: true });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, openSnackbar: false });
+  };
 
   useEffect(() => {
     setShowPhoneNumberEnabled(userInfo?.showPhoneNumber);
@@ -33,10 +49,16 @@ function SettingsPage() {
     setRepeatedPassword(e.target.value);
   };
 
-  const handleSubmitPasswordChange = () => {
+  const handleSubmitPasswordChange = async () => {
     setError(false);
     try {
       if (password !== repeatedPassword) throw new Error('Passwords do not match');
+      const body = {
+        password: password,
+        repeatedPassword: repeatedPassword,
+      };
+      await putData(process.env.REACT_APP_API_USERS_CHANGE_PASSWORD, body);
+      handleClick();
     } catch (e) {
       setError(true);
     }
@@ -54,6 +76,7 @@ function SettingsPage() {
       showPhoneNumber: !showPhoneNumberEnabled,
     };
     await putData(process.env.REACT_APP_API_USERS_DETAILS_UPDATE, body);
+    dispatch({ type: 'UPDATE_USER_DETAILS', payload: body });
   };
   const handleShowEmailOnChange = async () => {
     setShowEmailEnabled(!showEmailEnabled);
@@ -61,6 +84,7 @@ function SettingsPage() {
       showEmail: !showEmailEnabled,
     };
     await putData(process.env.REACT_APP_API_USERS_DETAILS_UPDATE, body);
+    dispatch({ type: 'UPDATE_USER_DETAILS', payload: body });
   };
 
   return (
@@ -68,11 +92,11 @@ function SettingsPage() {
       <div className='w-2/3 lg:w-1/3 flex flex-col items-center text-xl space-y-3'>
         <div className='w-full flex justify-between items-center'>
           <p>Show e-mail address</p>
-          <Switch color='secondary' checked={showEmailEnabled} onClick={handleShowEmailOnChange} />
+          <Switch color='secondary' checked={showEmailEnabled || false} onClick={handleShowEmailOnChange} />
         </div>
         <div className='w-full flex justify-between items-center'>
           <p>Show phone number</p>
-          <Switch color='secondary' checked={showPhoneNumberEnabled} onClick={handleShowPhoneNumberOnChange} />
+          <Switch color='secondary' checked={showPhoneNumberEnabled || false} onClick={handleShowPhoneNumberOnChange} />
         </div>
         <div className='w-full flex flex-col items-center space-y-6'>
           <div className='w-full pt-6 flex flex-col space-y-2'>
@@ -123,6 +147,13 @@ function SettingsPage() {
           </div>
         </DialogContent>
       </Dialog>
+      <Snackbar
+        autoHideDuration={4000}
+        anchorOrigin={{ vertical, horizontal }}
+        open={openSnackbar}
+        onClose={handleClose}
+        message='Password changed successfully'
+      />
     </div>
   );
 }

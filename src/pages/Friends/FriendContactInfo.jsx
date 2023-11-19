@@ -6,14 +6,16 @@ function FriendContactInfo({ friend }) {
       <div className='h-auto bg-neutral-50 rounded-lg w-full lg:w-10/12 pb-6'>
         <div className={'relative w-full h-10'}>
           <div className='absolute flex top-0 translate-y-[-50%] justify-center w-full '>
-            <CustomAvatar user={friend} size={5} />
+            <div className='border-4 border-white rounded-full shadow-lg'>
+              <CustomAvatar user={friend} size={5} />
+            </div>
           </div>
         </div>
         <div className='flex justify-around'>
           <div className='flex flex-col space-y-3 px-6'>
             <UserInfoCardField fieldTitle={'Name'} fieldText={friend?.displayName} />
             <UserInfoCardField fieldTitle={'Username'} fieldText={friend?.username} />
-            <UserInfoCardField fieldTitle={'Phone number'} fieldText={'+' + friend?.phoneNumber} />
+            <UserInfoCardField fieldTitle={'Phone number'} fieldText={friend?.phoneNumber} optionalCharacter={'+'} />
             <UserInfoCardField fieldTitle={'E-mail address'} fieldText={friend?.email} />
           </div>
           <div className='flex flex-col space-y-3 px-6'>

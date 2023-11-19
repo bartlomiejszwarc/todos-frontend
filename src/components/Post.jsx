@@ -47,7 +47,11 @@ function Post({ post }) {
           </div>
         </div>
         {post?.owner === userInfo?._id && (
-          <DeleteIcon className='text-neutral-500' sx={{ width: '20px' }} onClick={() => setOpen(true)} />
+          <DeleteIcon
+            className='text-neutral-500 cursor-pointer'
+            sx={{ width: '20px' }}
+            onClick={() => setOpen(true)}
+          />
         )}
       </div>
       <div>{post?.text}</div>

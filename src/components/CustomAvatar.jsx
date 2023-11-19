@@ -10,7 +10,7 @@ function CustomAvatar({ user, size }) {
 
   return (
     <>
-      {!user?.profilePictureUrl && (
+      {!user?.profileImage && (
         <Avatar
           sx={{
             bgcolor: color,
@@ -36,6 +36,7 @@ function CustomAvatar({ user, size }) {
           </span>
         </Avatar>
       )}
+      {user?.profileImage && <Avatar src={user?.profileImage} sx={{ width: `${size}rem`, height: `${size}rem` }} />}
     </>
   );
 }
