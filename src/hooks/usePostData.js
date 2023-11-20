@@ -21,6 +21,7 @@ export const usePostData = () => {
     try {
       const res = await axios.post(postUrl, body, config);
       setData(res.data);
+      return res;
     } catch (e) {
       setError(e);
     }
