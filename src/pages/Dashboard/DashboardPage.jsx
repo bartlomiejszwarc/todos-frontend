@@ -11,7 +11,7 @@ function DashboardPage() {
 
   return (
     <>
-      <div className='w-full lg:w-4/5 lg:rounded-lg h-screen lg:h-4/5 bg-neutral-50 flex'>
+      <div className='w-full lg:w-[90%] lg:rounded-lg h-screen lg:h-[90%] bg-neutral-50 flex'>
         <div>
           <CustomDrawer>
             <DashboardTabs />

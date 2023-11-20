@@ -1,6 +1,6 @@
 import { Avatar } from '@mui/material';
 import { useSetDefaultBackgroundColor } from '../hooks/useSetDefaultBackgroundColor';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 function CustomAvatar({ user, size }) {
   const { color, setBackgroundColor } = useSetDefaultBackgroundColor();
 

@@ -2,7 +2,6 @@ import Drawer from '@mui/material/Drawer';
 import { useState, useEffect } from 'react';
 import { useScreenSizeContext } from '../hooks/useScreenSizeContext';
 function CustomDrawer({ children }) {
-  const [open, setOpen] = useState(true);
   const { showSidebar, dispatch } = useScreenSizeContext();
 
   function getCurrentDimension() {

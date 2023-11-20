@@ -43,7 +43,6 @@ function FriendsRequestsPage() {
   const [value, setValue] = useState(0);
   const { fetchData, data, isLoading, error } = useFetchData();
   const { user } = useAuthContext();
-  const [detailsArray, setDetailsArray] = useState([]);
   const { incoming, dispatch } = useFriendsContext();
 
   useEffect(() => {

@@ -1,13 +1,12 @@
 import FriendCard from '../../../components/FriendCard';
 import { useFetchData } from '../../../hooks/useFetchData';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useFriendsContext } from '../../../hooks/useFriendsContext';
 
 function FriendsList({ friendsList }) {
   const { friends, dispatch } = useFriendsContext();
   const { fetchData, data, isLoading } = useFetchData();
-  const [userDetailsArray, setUserDetailsArray] = useState([]);
 
   useEffect(() => {
     const fetchDataForAllRequests = async () => {
@@ -18,7 +17,6 @@ function FriendsList({ friendsList }) {
             return userData.user;
           }),
         );
-        setUserDetailsArray(results);
         dispatch({ type: 'SET_FRIENDS', payload: results });
       }
     };

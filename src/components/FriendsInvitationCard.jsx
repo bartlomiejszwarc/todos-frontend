@@ -40,17 +40,22 @@ function FriendsInvitationCard({ item }) {
     return null;
   }
 
-  return (
-    <div className='flex flex-row justify-between items-center'>
-      <div className='flex items-center space-x-4'>
+  const UserInfo = () => {
+    return (
+      <>
         <div>
           <CustomAvatar user={item} />
         </div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col '>
           <span className='text-xl'>{item?.displayName}</span>
           <span className='text-sm'>{item?.username}</span>
         </div>
-      </div>
+      </>
+    );
+  };
+
+  const RequestActions = () => {
+    return (
       <div className='space-x-4 flex items-center'>
         {!isAccepted && !isDeclined && (
           <div className=' h-8 w-8 flex items-center justify-center rounded-full hover:bg-green-100 cursor-pointer'>
@@ -80,6 +85,15 @@ function FriendsInvitationCard({ item }) {
         )}
         {isDeclined && !isAccepted && <span className='text-red-700 font-bold'>Declined</span>}
       </div>
+    );
+  };
+
+  return (
+    <div className='flex flex-row justify-between items-center'>
+      <div className='flex items-center space-x-4'>
+        <UserInfo />
+      </div>
+      <RequestActions />
     </div>
   );
 }

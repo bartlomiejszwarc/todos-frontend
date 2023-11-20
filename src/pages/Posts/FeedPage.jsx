@@ -27,7 +27,7 @@ function FeedPage() {
   }, [data]);
 
   return (
-    <div className='px-4'>
+    <div className='px-4 h-screen'>
       <div className='w-full flex flex-col items-center py-3 space-y-4'>
         <CreatePost />
       </div>

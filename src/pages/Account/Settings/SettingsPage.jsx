@@ -87,9 +87,9 @@ function SettingsPage() {
     dispatch({ type: 'UPDATE_USER_DETAILS', payload: body });
   };
 
-  return (
-    <div className='w-full flex justify-center py-6 h-auto'>
-      <div className='w-2/3 lg:w-1/3 flex flex-col items-center text-xl space-y-3'>
+  const SettingsSwitches = () => {
+    return (
+      <>
         <div className='w-full flex justify-between items-center'>
           <p>Show e-mail address</p>
           <Switch color='secondary' checked={showEmailEnabled || false} onClick={handleShowEmailOnChange} />
@@ -98,7 +98,52 @@ function SettingsPage() {
           <p>Show phone number</p>
           <Switch color='secondary' checked={showPhoneNumberEnabled || false} onClick={handleShowPhoneNumberOnChange} />
         </div>
+      </>
+    );
+  };
+
+  const AccountManagementButtons = () => {
+    return (
+      <div className='pt-12 flex flex-col items-center space-y-4'>
+        <p className='border-b-[1px] font-bold' onClick={logout}>
+          Logout
+        </p>
+        <p className='text-base text-red-800 border-b-[1px] font-bold' onClick={() => setOpen(true)}>
+          Delete your account
+        </p>
+      </div>
+    );
+  };
+
+  const DeleteAccountDialog = () => {
+    return (
+      <Dialog open={open}>
+        <DialogContent>
+          <div className='flex flex-col space-y-3'>
+            <span className='text-2xl font-[600]'>Delete account?</span>
+            <span className='text-xl font-[300]'>This can't be undone and it will be gone forever.</span>
+            <div className='flex justify-around pt-3'>
+              <button
+                className='border-b-[1px] text-red-700 font-medium text-xl'
+                onClick={() => handleDeleteAccount(userInfo?._id)}
+              >
+                Delete
+              </button>
+              <button className='text-neutral-400 text-xl' onClick={() => setOpen(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  };
+
+  return (
+    <div className='w-full flex justify-center py-6 h-auto'>
+      <div className='w-2/3 lg:w-1/3 flex flex-col items-center text-xl space-y-3'>
         <div className='w-full flex flex-col items-center space-y-6'>
+          <SettingsSwitches />
           <div className='w-full pt-6 flex flex-col space-y-2'>
             <p className='font-[600]'>Change your password</p>
             <TextField
@@ -119,34 +164,9 @@ function SettingsPage() {
             <ConfirmButton buttonText={'Change'} onClick={handleSubmitPasswordChange} />
           </div>
         </div>
-        <div className='pt-12 flex flex-col items-center space-y-4'>
-          <p className='border-b-[1px] font-bold' onClick={logout}>
-            Logout
-          </p>
-          <p className='text-base text-red-800 border-b-[1px] font-bold' onClick={() => setOpen(true)}>
-            Delete your account
-          </p>
-        </div>
+        <AccountManagementButtons />
       </div>
-      <Dialog open={open}>
-        <DialogContent>
-          <div className='flex flex-col space-y-3'>
-            <span className='text-2xl font-[600]'>Delete account?</span>
-            <span className='text-xl font-[300]'>This can't be undone and it will be gone forever.</span>
-            <div className='flex justify-around pt-3'>
-              <button
-                className='border-b-[1px] text-red-700 font-medium text-xl'
-                onClick={() => handleDeleteAccount(userInfo?._id)}
-              >
-                Delete
-              </button>
-              <button className='text-neutral-400 text-xl' onClick={() => setOpen(false)}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <DeleteAccountDialog />
       <Snackbar
         autoHideDuration={4000}
         anchorOrigin={{ vertical, horizontal }}

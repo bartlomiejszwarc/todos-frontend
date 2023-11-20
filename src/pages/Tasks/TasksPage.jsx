@@ -37,16 +37,35 @@ function TasksPage({ title }) {
     setDialogOpen(false);
   };
 
-  return (
-    <>
+  const CreateNewTaskButton = () => {
+    return (
       <button
-        className='bg-fuchsia-700 rounded-full text-white w-12 h-12 absolute bottom-[3%] right-[5%] lg:bottom-[12%] lg:right-[14%] z-20'
+        className='bg-fuchsia-700 rounded-full text-white w-12 h-12 absolute bottom-[3%] right-[5%] lg:bottom-[7%] lg:right-[7%] z-20'
         onClick={() => {
           setDialogOpen(true);
         }}
       >
         <SpeedDialIcon />
       </button>
+    );
+  };
+
+  const CreateNewTaskDialog = () => {
+    return (
+      <Dialog
+        open={dialogOpen}
+        sx={{
+          '& .MuiPaper-rounded': { width: '100%' },
+        }}
+      >
+        <CreateTaskDialog onClose={handleCloseDialog} />
+      </Dialog>
+    );
+  };
+
+  return (
+    <>
+      <CreateNewTaskButton />
       {isLoading && <TaskSkeleton amount='5' />}
       {!isLoading && (
         <div className='pt-2 relative'>
@@ -58,15 +77,7 @@ function TasksPage({ title }) {
           <p className='text-3xl font-thin text-center'>Nothing to do here</p>
         </div>
       )}
-
-      <Dialog
-        open={dialogOpen}
-        sx={{
-          '& .MuiPaper-rounded': { width: '100%' },
-        }}
-      >
-        <CreateTaskDialog onClose={handleCloseDialog} />
-      </Dialog>
+      <CreateNewTaskDialog />
     </>
   );
 }

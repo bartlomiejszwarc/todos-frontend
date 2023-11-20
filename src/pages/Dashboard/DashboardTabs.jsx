@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 
 function DashboardTabs() {
-  const { user, userInfo } = useAuthContext();
+  const { userInfo } = useAuthContext();
   const { dispatch: tasksDispatch } = useTasksContext();
   const { dispatch: dashboardContentDispatch } = useDashboardContentContext();
 
@@ -27,11 +27,10 @@ function DashboardTabs() {
     dashboardContentDispatch({ type: type, payload: { tab: title } });
   };
 
-  return (
-    <div className='h-auto flex flex-col space-y-2'>
-      <span className='pl-6'>Hello, {userInfo?.displayName}</span>
-      <span className='pl-5 pt-4 font-bold text-xl'>Tasks</span>
+  const TabsContainer = () => {
+    return (
       <div className='flex flex-col space-y-4 '>
+        <span className='pl-5 pt-4 font-bold text-xl'>Tasks</span>
         <MenuTab
           text={'Inbox'}
           textIcon={<InboxIcon />}
@@ -109,6 +108,13 @@ function DashboardTabs() {
           }}
         />
       </div>
+    );
+  };
+
+  return (
+    <div className='h-auto flex flex-col space-y-2'>
+      <span className='pl-6'>Hello, {userInfo?.displayName}</span>
+      <TabsContainer />
     </div>
   );
 }

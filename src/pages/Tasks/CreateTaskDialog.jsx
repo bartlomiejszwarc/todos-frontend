@@ -71,9 +71,8 @@ function CreateTaskDialog({ onClose }) {
     setTaskDescription(e.target.value);
   };
 
-  return (
-    <div className='rounded-lg h-96 flex flex-col px-3 pt-4  font-livvic'>
-      <CloseIcon className='absolute right-4 top-4 cursor-pointer' onClick={handleDialogClose} />
+  const CreateTaskButton = () => {
+    return (
       <div
         className={`absolute bottom-3 right-3 cursor-pointer rounded-full w-12 h-12 flex items-center justify-center ${
           taskTitle ? 'bg-fuchsia-700' : 'bg-neutral-300'
@@ -82,9 +81,14 @@ function CreateTaskDialog({ onClose }) {
       >
         <ArrowUpwardIcon className='text-neutral-100' style={{ fontSize: '1.5rem' }} />
       </div>
-      <div>
-        <span className='text-2xl font-bold'> Create new task </span>
-      </div>
+    );
+  };
+
+  return (
+    <div className='rounded-lg h-96 flex flex-col px-3 pt-4'>
+      <CloseIcon className='absolute right-4 top-4 cursor-pointer' onClick={handleDialogClose} />
+      <CreateTaskButton />
+      <p className='text-2xl font-bold'> Create new task </p>
       <div className='flex flex-col space-y-6 pt-8'>
         <input
           placeholder='Task title'

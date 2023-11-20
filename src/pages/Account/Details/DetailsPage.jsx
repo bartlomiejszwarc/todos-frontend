@@ -96,27 +96,47 @@ function DetailsPage() {
 
   if (!userInfo) return null;
 
+  const ProfileImage = () => {
+    return (
+      <div className='relative flex justify-center'>
+        <CustomAvatar user={userInfo} size={10} />
+        <div className='absolute flex bottom-2 right-2'>
+          <label htmlFor='photoInput'>
+            <AddAPhotoIcon
+              className='text-neutral-700 cursor-pointer hover:opacity-90'
+              style={{ width: '35px', height: 'auto' }}
+            />
+            <input
+              id='photoInput'
+              onChange={(e) => handleAddPhoto(e.target.files[0])}
+              type='file'
+              accept='image/*'
+              style={{ display: 'none' }}
+            />
+          </label>
+        </div>
+      </div>
+    );
+  };
+
+  const ChangeDetailsButton = () => {
+    return (
+      <div className='w-1/2 pt-4'>
+        <ConfirmButton
+          buttonText={'Change details'}
+          onClick={() => {
+            updateDetails();
+            handleClick();
+          }}
+        />
+      </div>
+    );
+  };
+
   return (
     <div className='flex justify-center w-full h-auto '>
       <div className='w-[300px] h-full py-6 flex flex-col items-center justify-center space-y-4'>
-        <div className='relative flex justify-center'>
-          <CustomAvatar user={userInfo} size={10} />
-          <div className='absolute flex bottom-2 right-2'>
-            <label htmlFor='photoInput'>
-              <AddAPhotoIcon
-                className='text-neutral-700 cursor-pointer hover:opacity-90'
-                style={{ width: '35px', height: 'auto' }}
-              />
-              <input
-                id='photoInput'
-                onChange={(e) => handleAddPhoto(e.target.files[0])}
-                type='file'
-                accept='image/*'
-                style={{ display: 'none' }}
-              />
-            </label>
-          </div>
-        </div>
+        <ProfileImage />
         <TextField label={userInfo?.username} focused disabled fullWidth sx={{ bgcolor: 'white' }} />
         <TextField
           label='Name'
@@ -147,16 +167,7 @@ function DetailsPage() {
           value={city || ''}
         />
         <PhoneInput specialLabel='' country={'pl'} onChange={(e) => handleOnChangePhoneNumber(e)} value={phoneNumber} />
-
-        <div className='w-1/2 pt-4'>
-          <ConfirmButton
-            buttonText={'Change details'}
-            onClick={() => {
-              updateDetails();
-              handleClick();
-            }}
-          />
-        </div>
+        <ChangeDetailsButton />
       </div>
       <Snackbar
         autoHideDuration={4000}

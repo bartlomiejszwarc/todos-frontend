@@ -8,6 +8,8 @@ import { usePostsContext } from '../hooks/usePostsContext';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from './DialogContent';
+import Tooltip from '@mui/material/Tooltip';
+import UserInfoCardMinimal from './UserInfoCardMinimal';
 
 function Post({ post }) {
   const { fetchData, data, isLoading } = useFetchData();
@@ -15,6 +17,7 @@ function Post({ post }) {
   const { dispatch } = usePostsContext();
   const { deleteData } = useDeleteData();
   const { user, userInfo } = useAuthContext();
+  const [tooltipOpen, setTooltipOpen] = useState(false);
 
   useEffect(() => {
     if (post) fetchData(process.env.REACT_APP_API_USERS_DETAILS, post?.owner);
@@ -28,14 +31,15 @@ function Post({ post }) {
     }, 500);
   };
 
-  return (
-    <div
-      className={`border-[1px] h-auto w-4/5 lg:w-3/5 flex flex-col space-y-2 px-3 py-3 rounded-lg ${
-        post?.owner === user?.id ? 'bg-indigo-100' : 'bg-pink-100'
-      }`}
-    >
-      <div className='flex justify-between'>
-        <div className='flex space-x-2'>
+  const PostHeader = () => {
+    return (
+      <div className='flex justify-between relative '>
+        {tooltipOpen && (
+          <div className='absolute top-full z-10 mt-1'>
+            <UserInfoCardMinimal user={userInfo} />
+          </div>
+        )}
+        <div className='flex space-x-2 cursor-pointer' onClick={() => setTooltipOpen(!tooltipOpen)}>
           <CustomAvatar size='3' user={data?.user} />
           <div className='flex flex-col'>
             <p>
@@ -54,7 +58,15 @@ function Post({ post }) {
           />
         )}
       </div>
-      <div>{post?.text}</div>
+    );
+  };
+
+  const PostText = () => {
+    return <div onClick={() => setTooltipOpen(false)}>{post?.text}</div>;
+  };
+
+  const PostDialog = () => {
+    return (
       <Dialog open={open}>
         <DialogContent>
           <div className='flex flex-col space-y-3'>
@@ -76,6 +88,18 @@ function Post({ post }) {
           </div>
         </DialogContent>
       </Dialog>
+    );
+  };
+
+  return (
+    <div
+      className={`border-[1px] h-auto w-4/5 lg:w-3/5 flex flex-col space-y-2 px-3 py-3 rounded-lg ${
+        post?.owner === user?.id ? 'bg-indigo-100' : 'bg-pink-100'
+      }`}
+    >
+      <PostHeader />
+      <PostText />
+      <PostDialog />
     </div>
   );
 }

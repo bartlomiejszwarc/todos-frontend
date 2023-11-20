@@ -10,19 +10,21 @@ function PriorityList({ onClose, handleChooseOption }) {
   ];
 
   return (
-    <div className='flex flex-col pr-10 space-y-4 ml-3 py-2' onClick={onClose}>
+    <div className='flex flex-col space-y-2 px-5 py-2' onClick={onClose}>
       {options.map((option, key) => (
-        <div key={key}>
+        <div key={key} className={`cursor-pointer rounded-lg `}>
           <div
-            className='flex items-center px-2 text-lg font-thin'
+            className='flex items-center text-lg font-thin space-x-2'
             onClick={() => {
               handleChooseOption(option);
             }}
           >
-            <FlagIcon className='mr-3' style={{ color: `${option.color}` }} />
+            <FlagIcon style={{ color: `${option.color}` }} />
             <span>{option.text}</span>
           </div>
-          {key !== options.length - 1 && <Divider />}
+          <div className='w-full flex justify-center'>
+            {key !== options.length - 1 && <Divider sx={{ width: '75%', paddingTop: '8px' }} />}
+          </div>
         </div>
       ))}
     </div>

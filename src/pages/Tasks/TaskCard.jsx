@@ -32,31 +32,46 @@ function TaskCard({ task, index, lastItemIndex }) {
     }, 500);
   };
 
-  return (
-    <>
-      <div className='flex items-start '>
-        <Checkbox
-          onClick={() => {
-            handleDeleteTask(task._id);
-          }}
-          icon={<RadioButtonUncheckedIcon style={{ color: setColorByPriority(task) }} />}
-          checkedIcon={<CheckCircleIcon style={{ color: setColorByPriority(task) }} />}
-        />
-
-        <div className='flex flex-col px-2  h-auto w-full'>
-          <span className='text-2xl'>{task.text}</span>
-          <span>{task.description}</span>
-          <div className='flex items-center space-x-1' style={{ color: setColorByPriority(task) }}>
-            {task?.deadline && (
-              <>
-                <CalendarMonthIcon />
-                <span className='pt-1'>{moment(task.deadline).format('D MMM')}</span>
-              </>
-            )}
-          </div>
+  const TaskBody = () => {
+    return (
+      <div className='flex flex-col px-2  h-auto w-full'>
+        <span className='text-2xl'>{task.text}</span>
+        <span>{task.description}</span>
+        <div className='flex items-center space-x-1' style={{ color: setColorByPriority(task) }}>
+          {task?.deadline && (
+            <>
+              <CalendarMonthIcon />
+              <span className='pt-1'>{moment(task.deadline).format('D MMM')}</span>
+            </>
+          )}
         </div>
       </div>
-      {index !== lastItemIndex && <Divider />}
+    );
+  };
+
+  const TaskCheckbox = () => {
+    return (
+      <Checkbox
+        onClick={() => {
+          handleDeleteTask(task._id);
+        }}
+        icon={<RadioButtonUncheckedIcon style={{ color: setColorByPriority(task) }} />}
+        checkedIcon={<CheckCircleIcon style={{ color: setColorByPriority(task) }} />}
+      />
+    );
+  };
+
+  const TaskDivider = () => {
+    return <>{index !== lastItemIndex && <Divider />}</>;
+  };
+
+  return (
+    <>
+      <div className='flex items-start'>
+        <TaskCheckbox />
+        <TaskBody />
+      </div>
+      <TaskDivider />
     </>
   );
 }
