@@ -74,7 +74,7 @@ function TasksPage({ title }) {
       )}
       {!isLoading && tasksUpdated?.length === 0 && (
         <div className='pt-3 relative flex w-full justify-center overflow-y-hidden px-16'>
-          <p className='text-3xl font-thin text-center'>Nothing to do here</p>
+          <p className='text-xl font-thin text-center'>You don't have any tasks here</p>
         </div>
       )}
       <CreateNewTaskDialog />

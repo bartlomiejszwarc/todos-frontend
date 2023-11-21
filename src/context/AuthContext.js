@@ -61,13 +61,16 @@ export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
-
     if (isAuth && !isLoading) {
       dispatch({ type: 'LOGIN', payload: user });
       navigate('dashboard');
     }
     if (!isAuth && !isLoading) {
-      dispatch({ type: 'LOGOUT', payload: user });
+      dispatch({ type: 'LOGOUT', payload: null });
+      navigate('/');
+    }
+    if (!user) {
+      dispatch({ type: 'LOGOUT', payload: null });
       navigate('/');
     }
   }, [isAuth]);

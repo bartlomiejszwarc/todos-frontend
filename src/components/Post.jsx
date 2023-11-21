@@ -36,7 +36,7 @@ function Post({ post }) {
       <div className='flex justify-between relative '>
         {tooltipOpen && (
           <div className='absolute top-full z-10 mt-1'>
-            <UserInfoCardMinimal user={userInfo} />
+            <UserInfoCardMinimal user={post?.owner} />
           </div>
         )}
         <div className='flex space-x-2 cursor-pointer' onClick={() => setTooltipOpen(!tooltipOpen)}>
