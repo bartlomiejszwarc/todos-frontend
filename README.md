@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+### This application provides a task management system with additional social media features to enhance collaboration and communication among users.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+### Task management
+- Creating tasks (setting task title, description, priority and deadline)
+- Editing existing tasks
+- Filtering tasks (Inbox, Today, Next 7 days, Important)
+- Removing completed or unnecessary tasks from your list
 
-## Available Scripts
+<img src="https://github.com/bartlomiejszwarc/todos-frontend/assets/86133933/531ed486-4c82-4861-bc27-1c51ca580182" width="75%" height="75%">
+<img src="https://github.com/bartlomiejszwarc/todos-frontend/assets/86133933/6d8577ee-b0ee-4211-aee6-2fe44859eef3" width="25%" height="25%">
+<img src="https://github.com/bartlomiejszwarc/todos-frontend/assets/86133933/dff8fe57-d34a-432b-a9e2-fd90318d2325" width="25%" height="25%">
+<img src="https://github.com/bartlomiejszwarc/todos-frontend/assets/86133933/abbc493c-da47-41b5-983b-012d69294347" width="75%" height="75%">
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Social media features
+- Adding posts to get help from users from your friends list
+- Deleting posts
+- Searching and inviting users to your friends list
+- Accepting and declining invitations
+- Removing users from friends list
+- Displaying friends details (phone number, e-mail address, country, city, if available)
+- Reading other users posts
+- Profile customization (adding profile image, changing user's details such as display name, phone number, e-mail, city or country)
+- Settings (visibility of your email address and phone number to other users, changing password, removing account)
 
-### `npm test`
+<img src="https://github.com/bartlomiejszwarc/todos-frontend/assets/86133933/00cbaad5-676c-442c-8a09-926592e87c3b" width="25%" height="25%">
+<img src="https://github.com/bartlomiejszwarc/todos-frontend/assets/86133933/6db3e46a-5614-4574-acfa-1528e7b9c615" width="25%" height="25%">
+<img src="https://github.com/bartlomiejszwarc/todos-frontend/assets/86133933/cf9928b3-8de1-4a19-86fd-59ed4364deb2" width="25%" height="25%">
+<img src="https://github.com/bartlomiejszwarc/todos-frontend/assets/86133933/a2d905fa-e634-4f9e-b50c-1aefe1060178" width="25%" height="25%">
+<img src="https://github.com/bartlomiejszwarc/todos-frontend/assets/86133933/4141a368-f60d-4173-acba-a596fc84e6e3" width="25%" height="25%">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img src="https://github.com/bartlomiejszwarc/todos-frontend/assets/86133933/eadf64b1-2d23-40e4-8e65-1777b8dc72ad" width="25%" height="25%">
+<img src="https://github.com/bartlomiejszwarc/todos-frontend/assets/86133933/94de1076-569d-48eb-81c0-6b3ad865e1c9" width="25%" height="25%">
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Tech stack
+### Frontend
+- React
+- Tailwind CSS
+ 
+### Backend
+- Express.js
+- Mongoose
+- MongoDB
+### Backend repository: https://github.com/bartlomiejszwarc/todos-backend
