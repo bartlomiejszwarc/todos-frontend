@@ -26,7 +26,7 @@ function LoginForm() {
             type='password'
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/* <span className='text-red-700'>{error}</span> */}
+          <span className='text-red-700'>{error}</span>
         </div>
         <ConfirmButton buttonText={'Sign in'} onClick={handleSubmit} />
         <Divider>

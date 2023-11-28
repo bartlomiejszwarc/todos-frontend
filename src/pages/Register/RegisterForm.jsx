@@ -20,16 +20,8 @@ function RegisterForm() {
     <FormLayout formTitle={'Sign up'}>
       <div className='space-y-6'>
         <div className='flex flex-col items-center space-y-4'>
-          <TextField
-            variant='standard'
-            label='Username'
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <TextField
-            variant='standard'
-            label='Display name'
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
+          <TextField variant='standard' label='Username' onChange={(e) => setUsername(e.target.value)} />
+          <TextField variant='standard' label='Display name' onChange={(e) => setDisplayName(e.target.value)} />
           <TextField
             variant='standard'
             label='Password'

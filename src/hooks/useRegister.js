@@ -24,11 +24,12 @@ export const useRegister = () => {
     const res = await axios.post(process.env.REACT_APP_API_AUTH_REGISTER, body, {
       headers: headers,
     });
-    if (res?.status === 400) {
+    if (res?.data?.status === 400) {
       setError(res?.data?.error);
     }
 
-    if (res?.status === 200) {
+    if (res?.data?.status === 200) {
+      setError(null);
       setIsLoading(false);
       navigate('/');
     }

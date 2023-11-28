@@ -105,10 +105,10 @@ function SettingsPage() {
   const AccountManagementButtons = () => {
     return (
       <div className='pt-12 flex flex-col items-center space-y-4'>
-        <p className='border-b-[1px] font-bold' onClick={logout}>
+        <p className='border-b-[1px] font-bold cursor-pointer' onClick={logout}>
           Logout
         </p>
-        <p className='text-base text-red-800 border-b-[1px] font-bold' onClick={() => setOpen(true)}>
+        <p className='text-base text-red-800 border-b-[1px] font-bold cursor-pointer' onClick={() => setOpen(true)}>
           Delete your account
         </p>
       </div>
